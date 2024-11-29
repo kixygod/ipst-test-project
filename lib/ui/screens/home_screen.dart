@@ -28,13 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _toggleLanguage() {
-    // Получаем текущее состояние локали
     final currentLocale = context.read<LocaleBloc>().state.locale;
 
-    // Создаем новую локаль на основе текущей
     final newLocale = currentLocale.languageCode == 'ru' ? const Locale('en', 'US') : const Locale('ru', 'RU');
 
-    // Добавляем событие изменения локали
     context.read<LocaleBloc>().add(LocaleChanged(newLocale));
   }
 

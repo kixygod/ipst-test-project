@@ -22,7 +22,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => CameraBloc(CameraRepository(), context)),
-        BlocProvider(create: (context) => LocaleBloc()), // Здесь инициализируется LocaleBloc
+        BlocProvider(create: (context) => LocaleBloc()),
       ],
       child: PiPMaterialApp(
         home: MainApp(),
@@ -69,7 +69,7 @@ class _MainAppState extends State<MainApp> {
         return LocaleProvider(
           locale: state.locale,
           setLocale: (newLocale) {
-            context.read<LocaleBloc>().add(LocaleChanged(newLocale)); // Обновление локали
+            context.read<LocaleBloc>().add(LocaleChanged(newLocale));
           },
           child: MaterialApp.router(
             routerDelegate: _appRouter.delegate(),
@@ -81,7 +81,7 @@ class _MainAppState extends State<MainApp> {
               Locale('en', 'US'),
               Locale('ru', 'RU'),
             ],
-            locale: state.locale, // Локаль для MaterialApp
+            locale: state.locale,
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,

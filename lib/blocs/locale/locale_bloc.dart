@@ -16,7 +16,6 @@ class LocaleChanged extends LocaleEvent {
 class LocaleBloc extends Bloc<LocaleEvent, LocaleState> {
   LocaleBloc() : super(LocaleState(_getDeviceLocale())) {
     on<LocaleChanged>((event, emit) {
-      // Обновляем локаль
       emit(LocaleState(event.newLocale));
     });
   }
