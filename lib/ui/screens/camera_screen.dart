@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ipst_test_project/data/models/camera.dart';
 import 'package:ipst_test_project/data/repositories/camera_repository.dart';
+import 'package:ipst_test_project/routes/app_router.gr.dart';
 import 'package:ipst_test_project/ui/localization/app_localizations.dart';
 import 'package:ipst_test_project/ui/screens/error_screen.dart';
 import 'package:ipst_test_project/ui/widgets/video_player_widget.dart';
@@ -26,6 +28,17 @@ class CameraScreen extends StatelessWidget {
           return ErrorScreen(errorMessage: '${localizations.cameraScreenDataError}${snapshot.error}');
         } else {
           final camera = snapshot.data!;
+
+          if (!camera.isActive) {
+            Fluttertoast.showToast(
+              msg: '${camera.name} - ${localizations.cameraDisabled}',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              fontSize: 14.0,
+            );
+            context.pushRoute(const HomeRoute());
+          }
 
           return Scaffold(
             appBar: AppBar(

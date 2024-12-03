@@ -35,7 +35,7 @@ class CameraTile extends StatelessWidget {
               onTap: () {
                 if (!updatedCamera.isActive) {
                   Fluttertoast.showToast(
-                    msg: localizations.cameraDisabled,
+                    msg: '${camera.name} - ${localizations.cameraDisabled}',
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     timeInSecForIosWeb: 1,

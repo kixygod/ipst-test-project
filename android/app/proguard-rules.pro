@@ -1,0 +1,7 @@
+-keep class com.example.ipst_test_project.data.models.** { *; }
+-keep class org.videolan.** { *; }
+-dontwarn org.videolan.**
+-keep class com.flavienlaurent.** { *; }
+-dontwarn com.flavienlaurent.**
+-keep class io.flutter.** { *; }
+-dontwarn io.flutter.**

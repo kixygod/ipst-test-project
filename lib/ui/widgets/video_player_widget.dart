@@ -30,24 +30,30 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 
   Future<void> _loadVideo() async {
-    await Future.delayed(const Duration(seconds: 3));
+    try {
+      await Future.delayed(const Duration(seconds: 3));
 
-    setState(() {
-      _isVideoReady = true;
-    });
+      setState(() {
+        _isVideoReady = true;
+      });
 
-    if (isValidVideoUrl(widget.videoAsset)) {
-      _controller = VlcPlayerController.network(
-        widget.videoAsset,
-        autoPlay: true,
-        options: VlcPlayerOptions(),
-      );
-    } else {
-      _controller = VlcPlayerController.asset(
-        'assets/sample_video.mp4',
-        autoPlay: true,
-        options: VlcPlayerOptions(),
-      );
+      if (isValidVideoUrl(widget.videoAsset)) {
+        _controller = VlcPlayerController.network(
+          widget.videoAsset,
+          autoPlay: true,
+          // options: VlcPlayerOptions(),
+          // hwAcc: HwAcc.full,
+        );
+      } else {
+        _controller = VlcPlayerController.asset(
+          'assets/sample_video.mp4',
+          autoPlay: true,
+          // options: VlcPlayerOptions(),
+          // hwAcc: HwAcc.full,
+        );
+      }
+    } catch (e) {
+      print("Error loading video: $e");
     }
   }
 
@@ -59,8 +65,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Center(
         child: Stack(
           children: [
             if (!_isVideoReady)
@@ -72,14 +77,11 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                 ),
               )
             else
-              AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Center(
-                  child: VlcPlayer(
-                    controller: _controller,
-                    virtualDisplay: true,
-                    aspectRatio: 16 / 9,
-                  ),
+              Positioned.fill(
+                child: VlcPlayer(
+                  controller: _controller,
+                  virtualDisplay: true,
+                  aspectRatio: _controller.value.aspectRatio,
                 ),
               ),
             Positioned(
@@ -118,7 +120,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             ),
           ],
         ),
-      ),
     );
   }
 
