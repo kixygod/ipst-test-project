@@ -13,3 +13,7 @@ dart run build_runner build
 ```
 flutter run
 ```
+# Links for open source videos
+- http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+- http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4
+- http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4
